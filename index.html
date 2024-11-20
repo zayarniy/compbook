@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,18 +24,116 @@
 
 
 </head>
+
 <body>
     <div id='app' class="container d-flex flex-column min-vh-100" style="max-width: 600px;min-width: 600px;">
         <div class="row">
             <div class="col-12 logo bg-white">
                 <a href="https://lyceum.mgimo.ru/"> <img src="images/logo02.png" width="70px" /></a>
-                <span class="logo">Книга жалоб и предложений</span>
+                <span class="logo roboto-bold">Книга жалоб и предложений</span>
                 <span class="spelling_bee_logo nerko-one-regular" v-html="contestName"></span>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <form>
+        <div class="form-group">
+            <label for="date">Дата:</label>
+            <input type="date" class="form-control" id="date" required>
+        </div>
+        <div class="form-group">
+            <label for="teacher">Учитель:</label>
+            <input type="text" class="form-control" id="teacher" placeholder="Введите имя учителя" required>
+        </div>
+        <div class="form-group">
+            <label for="grade">Оценка:</label>
+            <!--<input type="number" class="form-control" id="grade" min="1" max="5" placeholder="Введите оценку (1-5)" required>-->
+            <select id="grade" class="form-control" >
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>            
+        </div>
+        <div class="form-group">
+            <label for="reason">Причина:</label>
+            <select id="reason" class="form-control" >
+                <option>Жалоба</option>
+                <option>Благодарность</option>
+                <option>Предложение</option>
+                <option>Другое</option>
+            </select>
+            <!--<textarea class="form-control" id="reason" rows="3" placeholder="Введите причину" required></textarea>-->
+        </div>
+        <div class="form-group">
+            <label for="subject">Предмет:</label>
+            <input type="text" class="form-control" id="subject" placeholder="Введите название предмета" required>
+        </div>
+        <!--<button type="submit" class="btn btn-primary">Отправить</button>-->
+        </form>
+    <!--
+                <table class="table">
+                    <th>
+                    <td>Дата</td>
+                    <td>Учитель</td>
+                    <td>Оценка</td>
+                    <td>Причина</td>
+                    </th>
+                    <tr>
+                        <td></td>
+                        <td><input type="date"/></td>
+                        <td>
+                            <input type="text" />
+                            Предмет
+                            <input type="text" />
+                        </td>
+
+                        <td><select>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option>Жалоба</option>
+                                <option>Благодарность</option>
+                                <option>Предложение</option>
+                                <option>Другое</option>
+                            </select>
+                        </td>
+
+
+                    </tr>
+                </table>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for="story">Обращения</label>
+
+                <textarea id="story" name="story" rows="10" class="form-control" >Опишите причину обращения (максимум 1024 символа)
+                </textarea>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" style="margin: 5px;">Отправить</button>
+            </div>
+        </div>
+        <footer class="row mt-auto bg-white text-black">
+            <!--<div class="col roboto-bold" style="text-align: right;">Горчаковский Лицей МГИМО, 2024 &#169;</div>-->
+            <div class="col roboto-bold" style="text-align: right;color: #000;;">Горчаковский Лицей МГИМО, 2024</div>
+        </footer>
     </div><!--container-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="scripts/script.js"></script>
-    <script src="libs/sweetalert2@11"></script>        
+    <script src="libs/sweetalert2@11"></script>
 </body>
+
 </html>
