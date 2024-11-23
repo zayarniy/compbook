@@ -54,3 +54,43 @@ function setCurrentDatetime() {
 
 // Вызываем функцию для установки текущего времени при загрузке страницы
 setCurrentDatetime();
+
+function SaveData() {
+
+    let timeApplySend = new Date();
+    // Создаем объект FormData
+    const formData = new FormData();
+
+    // Добавляем данные в формат
+    //formData.append('id', this.userID);
+    formData.append('time_apply_send', timeApplySend.toISOString());    
+    formData.append('user_teacher', document.getElementById("teacherSelect").value);
+    formData.append('user_grade', document.getElementById("grade"));
+    formData.append('user_time', document.getElementById("date-time-apply"));
+    formData.append('user_reason', document.getElementById("reason"));
+    formData.append('user_story', document.getElementById("story"));
+    
+    // Отправляем данные на сервер
+    fetch("php/savetodb.php", {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            // Обрабатываем ответ от сервера
+            //console.log('Response:', response);
+            
+            this.level++;                    
+            if (this.level<1)           {         
+            Swal.fire({ title: "Round is over", text: "Move on to the next round", icon: "success" }).then(() => {                            
+                    this.ChoiceTheme();})
+            }
+                else
+                Swal.fire({title:"Final contest is over",text: "Thanks for participating",icon: "success"}).then(()=>window.location.reload());
+                     
+            })
+        .catch(error => {
+            // Обрабатываем ошибки
+            console.error('Error:', error);
+        });
+
+},

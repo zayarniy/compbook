@@ -7,7 +7,7 @@ html {
     margin: 0;
     font-size: 20px;
     #background-color: #EBB734;
-    background: url(images/cover.jpg) center center fixed;
+    #background: url(images/cover.jpg) center center fixed;
     background-size: 100vh;
     color: black;
     #text-shadow: #FFF 1px 0 10px;
