@@ -60,11 +60,11 @@ $result = $conn->query("SELECT * FROM subjects");
         
         function deleteSubjects() {
             const checkboxes = document.querySelectorAll('input[name="ids[]"]:checked');
-            alert(checkboxes);
+            //alert(checkboxes);
             const idsToDelete = Array.from(checkboxes).map(cb => cb.value);            
             
             if (idsToDelete.length > 0) {
-                alert(JSON.stringify(idsToDelete));
+                //alert(JSON.stringify(idsToDelete));
                 const deleteField = document.createElement('input');
                 deleteField.type = 'hidden';
                 deleteField.name = 'delete';
