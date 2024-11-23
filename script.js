@@ -11,7 +11,7 @@ function populateSelect(subjects, selectElement, doIt) {
     // Проходим по каждому элементу массива subjects
     subjects.forEach(subject => {
         const option = document.createElement('option'); // Создаем элемент option
-        option.value = subject.id; // Устанавливаем значение
+        option.value = doIt(subject)//subject.id; // Устанавливаем значение
         option.textContent = doIt(subject); // Устанавливаем текст для отображения
         selectElement.appendChild(option); // Добавляем элемент option в select
     });
@@ -22,8 +22,9 @@ let sortSubjects = subjects.sort((a, b) => {
 });
 
 sortSubjects.push({
-    id:100,
-    name:"нет в списке"});
+    id: 100,
+    name: "нет в списке"
+});
 
 let sortTeachers = teachers.sort((a, b) => {
     if (a["lastname"] == "нет в списке") return true;
@@ -55,7 +56,7 @@ function setCurrentDatetime() {
 // Вызываем функцию для установки текущего времени при загрузке страницы
 setCurrentDatetime();
 
-function SaveData() {
+function saveData() {
 
     let timeApplySend = new Date();
     // Создаем объект FormData
@@ -63,13 +64,20 @@ function SaveData() {
 
     // Добавляем данные в формат
     //formData.append('id', this.userID);
-    formData.append('time_apply_send', timeApplySend.toISOString());    
+    formData.append('time_apply_send', timeApplySend.toISOString());
     formData.append('user_teacher', document.getElementById("teacherSelect").value);
-    formData.append('user_grade', document.getElementById("grade"));
-    formData.append('user_time', document.getElementById("date-time-apply"));
-    formData.append('user_reason', document.getElementById("reason"));
-    formData.append('user_story', document.getElementById("story"));
-    
+    formData.append('user_grade', document.getElementById("grade").value);
+    formData.append('user_time', document.getElementById("date-time-apply").value);
+    formData.append('user_reason', document.getElementById("reason").value);
+    formData.append('user_story', document.getElementById("story").value);
+    formData.append('user_subject', document.getElementById("subjectSelect").value);
+    console.log(timeApplySend.toISOString());
+    console.log(document.getElementById("teacherSelect").value);
+    console.log(document.getElementById("grade").value);
+    console.log(document.getElementById("date-time-apply").value);
+    console.log(document.getElementById("reason").value);
+    console.log(document.getElementById("story").value);
+    console.log(document.getElementById("subjectSelect").value);
     // Отправляем данные на сервер
     fetch("php/savetodb.php", {
         method: 'POST',
@@ -77,20 +85,14 @@ function SaveData() {
     })
         .then(response => {
             // Обрабатываем ответ от сервера
-            //console.log('Response:', response);
-            
-            this.level++;                    
-            if (this.level<1)           {         
-            Swal.fire({ title: "Round is over", text: "Move on to the next round", icon: "success" }).then(() => {                            
-                    this.ChoiceTheme();})
-            }
-                else
-                Swal.fire({title:"Final contest is over",text: "Thanks for participating",icon: "success"}).then(()=>window.location.reload());
-                     
-            })
+            console.log('Response:', response);
+
+           
+
+        })
         .catch(error => {
             // Обрабатываем ошибки
             console.error('Error:', error);
         });
 
-},
+}
