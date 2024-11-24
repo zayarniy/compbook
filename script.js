@@ -58,41 +58,56 @@ setCurrentDatetime();
 
 function saveData() {
 
-    let timeApplySend = new Date();
-    // Создаем объект FormData
-    const formData = new FormData();
 
-    // Добавляем данные в формат
-    //formData.append('id', this.userID);
-    formData.append('time_apply_send', timeApplySend.toISOString());
-    formData.append('user_teacher', document.getElementById("teacherSelect").value);
-    formData.append('user_grade', document.getElementById("grade").value);
-    formData.append('user_time', document.getElementById("date-time-apply").value);
-    formData.append('user_reason', document.getElementById("reason").value);
-    formData.append('user_story', document.getElementById("story").value);
-    formData.append('user_subject', document.getElementById("subjectSelect").value);
-    console.log(timeApplySend.toISOString());
-    console.log(document.getElementById("teacherSelect").value);
-    console.log(document.getElementById("grade").value);
-    console.log(document.getElementById("date-time-apply").value);
-    console.log(document.getElementById("reason").value);
-    console.log(document.getElementById("story").value);
-    console.log(document.getElementById("subjectSelect").value);
-    // Отправляем данные на сервер
-    fetch("php/savetodb.php", {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => {
-            // Обрабатываем ответ от сервера
-            console.log('Response:', response);
+    
+    let teacher = (document.getElementById("teacherSelect").value);
+    let grade = (document.getElementById("grade").value);
+    let dateTimeApply = (document.getElementById("date-time-apply").value);
+    let reason = document.getElementById("reason").value;
+    let story = (document.getElementById("story").value);
+    let subject = (document.getElementById("subjectSelect").value);
+    Swal.fire({
+        title: "Проверка:", html:
+            `Учитель:<strong>${teacher}</strong><br>
+            Предмет:<strong>${subject}</strong><br>
+            Оценка:<strong>${grade}</strong><br>
+            Время:<strong>${dateTimeApply}</strong><br>`, showCancelButton: true, confirmButtonText: "Отправить", cancelButtonText: "Нет"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let timeApplySend = new Date();
+            // Создаем объект FormData
+            const formData = new FormData();
 
-           
+            // Добавляем данные в формат
+            //formData.append('id', this.userID);
+            formData.append('time_apply_send', timeApplySend.toISOString());
+            formData.append('user_teacher', document.getElementById("teacherSelect").value);
+            formData.append('user_grade', document.getElementById("grade").value);
+            formData.append('user_time', document.getElementById("date-time-apply").value);
+            formData.append('user_reason', document.getElementById("reason").value);
+            formData.append('user_story', document.getElementById("story").value);
+            formData.append('user_subject', document.getElementById("subjectSelect").value);
+            // Отправляем данные на сервер
+            fetch("php/savetodb.php", {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    // Обрабатываем ответ от сервера
+                    console.log('Response:', response);
 
-        })
-        .catch(error => {
-            // Обрабатываем ошибки
-            console.error('Error:', error);
-        });
 
+
+                })
+                .catch(error => {
+                    // Обрабатываем ошибки
+                    console.error('Error:', error);
+                });
+
+            window.location.reload();
+
+        }
+
+
+    });
 }
